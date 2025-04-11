@@ -14,3 +14,10 @@ services:
       - "5001:5001"
     volumes:
       - ./notification_service:/app
+      
+  order_service:
+    build: ./order_service
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./order_service:/app
