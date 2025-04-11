@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  user_service:
+    build: ./user_service
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./user_service:/app
+
+  notification_service:
+    build: ./notification_service
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./notification_service:/app
