@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: user-service:latest
+        image: localhost:5000/user-service
         ports:
         - containerPort: 5000

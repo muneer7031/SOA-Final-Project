@@ -15,5 +15,6 @@ spec:
       containers:
       - name: notification-service
         image: notification-service:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 5001

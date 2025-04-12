@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import requests  # <-- New import
 
 app = Flask(__name__)
 
@@ -8,6 +9,21 @@ users = []
 def register():
     data = request.json
     users.append(data)
+
+    # Send notification to notification-service
+    try:
+        notify_response = requests.post(
+            "http://notification-service/send_notification",
+            json={
+                "name": data.get("name"),
+                "email": data.get("email")
+            },
+            timeout=5  # optional: avoid long waits
+        )
+        print("Notification response:", notify_response.text)
+    except Exception as e:
+        print("Failed to send notification:", str(e))
+
     return jsonify({"message": "User registered successfully"}), 201
 
 @app.route('/users', methods=['GET'])
