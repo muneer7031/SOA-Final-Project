@@ -45,7 +45,7 @@ Each service is self-contained, RESTful, and scalable.
 
 ### Build and Run with Docker Compose
 
-```bash
+``` 
 docker-compose up --build
 Access Locally:
 User Service: http://localhost:5000/register
@@ -54,20 +54,20 @@ Notification Service: http://localhost:5001/send_notification
 
 ☸️ Kubernetes Deployment (Docker Desktop)
 Apply Kubernetes Resources
-bash
-Copy
-Edit
+ 
+ 
+ 
 kubectl apply -f k8s/
 Verify Pods & Services
-bash
-Copy
-Edit
+ 
+ 
+ 
 kubectl get pods
 kubectl get services
 Port Forward Services
-bash
-Copy
-Edit
+ 
+ 
+ 
 kubectl port-forward deployment/user-service 8080:5000
 kubectl port-forward deployment/notification-service 8181:5001
 ✅ CI/CD – GitHub Actions
@@ -82,38 +82,47 @@ File: .github/workflows/ci.yml
 🧪 Testing
 Unit and integration tests included:
 
-bash
-Copy
-Edit
+ 
+ 
+ 
 user_service/test_app.py
 notification_service/test_app.py
 Run locally:
 
-bash
-Copy
-Edit
+ 
+ 
+ 
 python test_app.py
 CI pipeline also executes these automatically via GitHub Actions.
 
 📊 Monitoring and Scaling
 Horizontal Pod Autoscaler (HPA) for user-service:
 
-bash
-Copy
-Edit
+ 
+ 
+ 
 kubectl autoscale deployment user-service --cpu-percent=50 --min=1 --max=5
 Basic logs available via:
 
-bash
-Copy
-Edit
+ 
+ 
+ 
 kubectl logs -l app=user-service
 ✅ Metrics Server installed and connected
 
+## 📜 Centralized Logging (Lightweight)
+
+For centralized log visibility across services, the project leverages native Kubernetes logging via:
+
+``` 
+kubectl logs -l app=user-service
+kubectl logs -l app=notification-service
+
+
 📁 Folder Structure
 sql
-Copy
-Edit
+ 
+ 
 SOA-Final-Project/
 ├── user_service/
 │   ├── app.py
