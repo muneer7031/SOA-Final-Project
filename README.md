@@ -1,83 +1,119 @@
-# 🏨 SOA Final Project – Online Hotel/Cottage Booking Platform
+# 🏨 SOA Final Project – Microservices-based Hotel/Cottage Booking Platform
 
 [![CI](https://github.com/muneer7031/SOA-Final-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/muneer7031/SOA-Final-Project/actions)
 
-## 📘 Project Description
+## 📘 Project Overview
 
-A microservices-based hotel/cottage booking service that allows users to register and receive booking-related notifications via email. Built using Python (Flask), Docker, and Kubernetes.
+This project simulates a real-world microservices-based hotel/cottage booking system. It demonstrates the core principles of:
+
+- Modular microservice design
+- RESTful API interaction
+- Docker-based containerization
+- Kubernetes-based orchestration
+- CI/CD automation and monitoring
+
+The system includes services for user registration, order handling, and notification delivery — all developed and deployed locally using Docker Desktop with Kubernetes support.
+
+---
+
+## 🔧 Key Activities Implemented
+
+| Activity                | Description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| ✅ Microservices        | Separate services for `user`, `order`, and `notification` with clear APIs  |
+| ✅ Containerization     | Dockerfiles created and services containerized                             |
+| ✅ Docker Compose       | Used for local multi-container development                                 |
+| ✅ Kubernetes Setup     | YAML files created for deployments and services                            |
+| ✅ CI/CD Pipeline       | GitHub Actions pipeline implemented for test and deploy                    |
+| ✅ Monitoring           | HPA used with `kubectl` + logging via `kubectl logs`                       |
 
 ---
 
 ## 🧱 Microservices Overview
 
-| Service              | Description                                      |
-|----------------------|--------------------------------------------------|
-| `user_service`       | Handles user registration, authentication        |
-| `notification_service` | Sends email/SMS notifications to users         |
-| `order_service` *(optional)* | (Placeholder for booking logic)           |
+| Microservice          | Responsibility                                      |
+|-----------------------|------------------------------------------------------|
+| `user_service`        | Handles user registration and retrieval              |
+| `order_service`       | Processes user bookings *(optional placeholder)*     |
+| `notification_service`| Sends email-style notifications                      |
 
-Each service is independently containerized and exposed using Kubernetes deployments and services.
+Each service is self-contained, RESTful, and scalable.
 
 ---
 
-## 🐳 How to Run (Docker Compose)
+## 🐳 Docker Usage
+
+### Build and Run with Docker Compose
 
 ```bash
 docker-compose up --build
+Access Locally:
+User Service: http://localhost:5000/register
 
+Notification Service: http://localhost:5001/send_notification
 
-
-Access Services:
-Visit: http://localhost:5000/register – User Service
-
-Visit: http://localhost:5001/send_notification – Notification Service
-
-☸️ Kubernetes Deployment
-To deploy all services in your local Kubernetes cluster:
-
-
+☸️ Kubernetes Deployment (Docker Desktop)
+Apply Kubernetes Resources
+bash
+Copy
+Edit
 kubectl apply -f k8s/
-To verify deployments:
-
-
+Verify Pods & Services
+bash
+Copy
+Edit
 kubectl get pods
 kubectl get services
-To access endpoints via port forwarding:
-
-
+Port Forward Services
+bash
+Copy
+Edit
 kubectl port-forward deployment/user-service 8080:5000
-kubectl port-forward deployment/notification-service 8081:5001
+kubectl port-forward deployment/notification-service 8181:5001
 ✅ CI/CD – GitHub Actions
-Every push to the main branch triggers automated CI tests
+Workflow triggered on every push to main
 
-Status badge reflects real-time build status
+Runs automated test cases for all microservices
 
-Workflow file path: .github/workflows/ci.yml
+File: .github/workflows/ci.yml
+
+✅ Latest run status badge above
 
 🧪 Testing
-Unit tests are included for both services:
+Unit and integration tests included:
 
-
+bash
+Copy
+Edit
 user_service/test_app.py
 notification_service/test_app.py
 Run locally:
 
-
+bash
+Copy
+Edit
 python test_app.py
-Or automatically via GitHub Actions CI pipeline.
+CI pipeline also executes these automatically via GitHub Actions.
 
-📊 Monitoring
-Horizontal Pod Autoscaling (HPA):
+📊 Monitoring and Scaling
+Horizontal Pod Autoscaler (HPA) for user-service:
 
-
+bash
+Copy
+Edit
 kubectl autoscale deployment user-service --cpu-percent=50 --min=1 --max=5
-View logs:
+Basic logs available via:
 
+bash
+Copy
+Edit
 kubectl logs -l app=user-service
-Optional: Use Metrics Server to track CPU and memory usage for autoscaling.
+✅ Metrics Server installed and connected
 
 📁 Folder Structure
-
+sql
+Copy
+Edit
 SOA-Final-Project/
 ├── user_service/
 │   ├── app.py
@@ -89,9 +125,9 @@ SOA-Final-Project/
 │   ├── test_app.py
 │   ├── Dockerfile
 │   └── requirements.txt
-├── order_service/                 # (Optional placeholder)
+├── order_service/                 # (optional placeholder)
 ├── docker-compose.yml
-├── k8s/                           # Kubernetes YAMLs
+├── k8s/
 │   ├── user-deployment.yaml
 │   ├── user-service.yaml
 │   ├── notification-deployment.yaml
@@ -101,6 +137,16 @@ SOA-Final-Project/
 └── .github/
     └── workflows/
         └── ci.yml
+📦 Deliverables Summary
+Deliverable	Status
+Code Repository (GitHub)	✅ Complete
+Docker Images (Local Build)	✅ Done
+Kubernetes Manifests (YAML)	✅ Done
+CI/CD Pipeline	✅ Done
+Local Demo via Docker Desktop K8s	✅ Done
+Documentation (This README)	✅ Done
+Final Presentation (TBD)	🚧 Upcoming
 🧠 Author
-Muneer7031
+Mohammed Muneer
 🔗 GitHub: https://github.com/muneer7031
+
