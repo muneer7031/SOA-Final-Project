@@ -23,6 +23,9 @@ jobs:
       with:
         python-version: 3.9
 
+    - name: Install system dependencies
+      run: sudo apt-get update && sudo apt-get install -y build-essential python3-dev
+
     - name: Install dependencies
       run: |
         cd ${{ matrix.service }}
@@ -31,4 +34,4 @@ jobs:
     - name: Run tests
       run: |
         cd ${{ matrix.service }}
-        python test_app.py
+        python test_app.py  # Or use pytest test_app.py if you're using Pytest
