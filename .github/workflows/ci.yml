@@ -1,0 +1,34 @@
+name: CI for Microservices
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-services:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service: [user_service, notification_service]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        cd ${{ matrix.service }}
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        cd ${{ matrix.service }}
+        python test_app.py
